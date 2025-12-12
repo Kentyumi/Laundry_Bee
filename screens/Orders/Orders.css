@@ -1,25 +1,18 @@
-/* src/screens/Orders/Orders.css */
-
 /* ===== GENERAL ===== */
 body {
   margin: 0;
   padding: 0;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
   background: linear-gradient(135deg, #FFF5CC, #FFD94D);
 }
 
-/* Container card */
+/* Card container */
 .orders-card {
-  width: 90%;
-  max-width: 800px;
-  margin-top: 40px;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(25px);
+  max-width: 900px;
+  margin: 40px auto;
   padding: 30px;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(25px);
   border-radius: 32px;
   box-shadow: 0 12px 40px rgba(0,0,0,0.12);
 }
@@ -46,11 +39,11 @@ label {
   margin-bottom: 6px;
 }
 
-input {
+input[type="text"], input[type="number"], input[type="date"] {
   padding: 12px;
   border-radius: 18px;
   border: 1px solid rgba(255, 215, 0, 0.5);
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255,255,255,0.35);
   outline: none;
   font-size: 16px;
   transition: 0.3s;
@@ -58,7 +51,7 @@ input {
 
 input:focus {
   border: 1px solid #FFD700;
-  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 8px rgba(255,215,0,0.5);
 }
 
 /* Buttons */
@@ -75,19 +68,22 @@ button {
 #addOrder {
   background: linear-gradient(135deg, #FFD700, #FFC107);
   color: white;
-  box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+  box-shadow: 0 6px 20px rgba(255,193,7,0.4);
   margin-top: 10px;
 }
 
 #addOrder:hover {
   background: linear-gradient(135deg, #FFC107, #FFB300);
-  box-shadow: 0 6px 24px rgba(255, 193, 7, 0.55);
+  box-shadow: 0 6px 24px rgba(255,193,7,0.55);
 }
 
 #toggleLang {
   background: rgba(255, 215, 0, 0.3);
   color: #333;
   margin-bottom: 20px;
+  padding: 10px 18px;
+  border-radius: 22px;
+  cursor: pointer;
 }
 
 #toggleLang:hover {
@@ -133,4 +129,19 @@ td {
 
 .delete-btn:hover {
   background: #FF4C4C;
+}
+
+/* Logout button (fixed) */
+#logoutBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 18px;
+  border-radius: 20px;
+  background: #FFD700;
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  font-weight: 600;
 }

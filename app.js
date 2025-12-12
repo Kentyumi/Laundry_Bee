@@ -166,3 +166,46 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = $("toggleLang");
   if (toggleBtn) toggleBtn.addEventListener("click", toggleLanguage);
 });
+
+// src/App.js
+import React, { useState, useEffect } from "react";
+import LoginScreen from "./screens/Login/Login";
+import OrdersApp from "./screens/Orders/Orders";
+import "./screens/Orders/Orders.css"; // import Bubble style
+
+export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") === "true"
+  );
+
+  useEffect(() => {
+    const status = localStorage.getItem("isLoggedIn");
+    setIsLoggedIn(status === "true");
+  }, []);
+
+  const handleLoginSuccess = () => {
+    localStorage.setItem("isLoggedIn", "true");
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false);
+  };
+
+  return (
+    <>
+      {!isLoggedIn ? (
+        <LoginScreen onLoginSuccess={handleLoginSuccess} />
+      ) : (
+        <>
+          <button id="logoutBtn" onClick={handleLogout}>
+            Logout
+          </button>
+          <OrdersApp />
+        </>
+      )}
+    </>
+  );
+}
+
