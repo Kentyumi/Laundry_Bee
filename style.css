@@ -1,57 +1,76 @@
 body {
-  background: #f7f8fa;
   font-family: Arial, sans-serif;
+  background: #f2f6fc;
   margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #407bff;
   padding: 20px;
+  text-align: center;
+  color: white;
+  font-size: 24px;
 }
 
 .container {
-  max-width: 600px;
+  width: 90%;
+  max-width: 800px;
   margin: auto;
-  background: #fff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-
-h1, h2 {
-  text-align: center;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 25px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 label {
-  margin-top: 10px;
   display: block;
+  margin-top: 15px;
   font-weight: bold;
 }
 
-input, textarea {
+input {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
-  box-sizing: border-box;
-  border-radius: 8px;
   border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 button {
-  width: 100%;
-  background: #4CAF50;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
   margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: #407bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
   font-size: 16px;
+  cursor: pointer;
 }
 
 button:hover {
-  cursor: pointer;
-  opacity: 0.9;
+  background: #2f63d4;
 }
 
-.link {
-  display: block;
+table {
+  width: 100%;
+  border-collapse: collapse;
   margin-top: 20px;
+}
+
+table th, table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
   text-align: center;
-  color: #007BFF;
+}
+
+.delete-btn {
+  background: red;
+  color: white;
+  padding: 5px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
