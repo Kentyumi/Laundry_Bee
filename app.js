@@ -136,3 +136,8 @@ document.getElementById("addOrder").addEventListener("click", () => {
 
 // ----------------------------
 // INI
+
+function logout() {
+  localStorage.removeItem("isLoggedIn");
+  window.location.href = "login.html";
+}
