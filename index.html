@@ -8,42 +8,44 @@
 </head>
 <body>
 <header>
-    <h1>Laundry Bee</h1>
+    <h1 id="title">Laundry Bee</h1>
+    <button class="lang-btn" onclick="toggleLanguage()">🇬🇧 English / 🇻🇳 Tiếng Việt</button>
 </header>
 
 <div class="container">
-    <h2>New Order</h2>
+    <h2 id="newOrderTitle">New Order</h2>
 
-    <label>Customer Name</label>
+    <label id="lblCustomer">Customer Name</label>
     <input id="customer" type="text" placeholder="Enter customer name" />
 
-    <label>Phone Number</label>
+    <label id="lblPhone">Phone Number</label>
     <input id="phone" type="text" placeholder="Enter phone number" />
 
-    <label>Weight (kg)</label>
+    <label id="lblWeight">Weight (kg)</label>
     <input id="weight" type="number" placeholder="Kg" />
 
-    <label>Price per kg</label>
+    <label id="lblPrice">Price per kg</label>
     <input id="price" type="number" value="15000" />
 
-    <label>Received Date</label>
+    <label id="lblReceived">Received Date</label>
     <input id="received" type="date" />
 
-    <label>Return Date</label>
+    <label id="lblReturn">Return Date</label>
     <input id="return" type="date" />
 
     <button id="addOrder">Add Order</button>
 
-    <h2>Orders List</h2>
+    <h2 id="orderListTitle">Orders List</h2>
+
     <table>
         <thead>
         <tr>
-            <th>Customer</th>
-            <th>Phone</th>
-            <th>Kg</th>
-            <th>Total</th>
-            <th>Received</th>
-            <th>Return</th>
+            <th id="colCustomer">Customer</th>
+            <th id="colPhone">Phone</th>
+            <th id="colKg">Kg</th>
+            <th id="colTotal">Total</th>
+            <th id="colReceived">Received</th>
+            <th id="colReturn">Return</th>
             <th></th>
         </tr>
         </thead>
