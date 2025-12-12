@@ -45,28 +45,37 @@ const LANG = {
 let currentLang = localStorage.getItem("lang") || "en";
 
 // ----------------------------
+// HELPERS
+// ----------------------------
+const $ = (id) => document.getElementById(id);
+
+// ----------------------------
 // APPLY LANGUAGE
 // ----------------------------
 function applyLanguage() {
   const t = LANG[currentLang];
+  const map = {
+    newOrderTitle: t.newOrder,
+    lblCustomer: t.customer,
+    lblPhone: t.phone,
+    lblWeight: t.weight,
+    lblPrice: t.price,
+    lblReceived: t.received,
+    lblReturn: t.return,
+    addOrder: t.addOrder,
+    orderListTitle: t.ordersList,
+    colCustomer: t.colCustomer,
+    colPhone: t.colPhone,
+    colKg: t.colKg,
+    colTotal: t.colTotal,
+    colReceived: t.colReceived,
+    colReturn: t.colReturn
+  };
 
-  document.getElementById("newOrderTitle").textContent = t.newOrder;
-  document.getElementById("lblCustomer").textContent = t.customer;
-  document.getElementById("lblPhone").textContent = t.phone;
-  document.getElementById("lblWeight").textContent = t.weight;
-  document.getElementById("lblPrice").textContent = t.price;
-  document.getElementById("lblReceived").textContent = t.received;
-  document.getElementById("lblReturn").textContent = t.return;
-
-  document.getElementById("addOrder").textContent = t.addOrder;
-  document.getElementById("orderListTitle").textContent = t.ordersList;
-
-  document.getElementById("colCustomer").textContent = t.colCustomer;
-  document.getElementById("colPhone").textContent = t.colPhone;
-  document.getElementById("colKg").textContent = t.colKg;
-  document.getElementById("colTotal").textContent = t.colTotal;
-  document.getElementById("colReceived").textContent = t.colReceived;
-  document.getElementById("colReturn").textContent = t.colReturn;
+  Object.keys(map).forEach(id => {
+    const el = $(id);
+    if (el) el.textContent = map[id];
+  });
 }
 
 function toggleLanguage() {
@@ -80,23 +89,20 @@ function toggleLanguage() {
 // ----------------------------
 function loadOrders() {
   const orders = JSON.parse(localStorage.getItem("orders") || "[]");
-  const table = document.getElementById("orderTable");
+  const table = $("orderTable");
+  if (!table) return;
 
-  table.innerHTML = "";
-  orders.forEach((o, index) => {
-    const row = `
-      <tr>
-        <td>${o.customer}</td>
-        <td>${o.phone}</td>
-        <td>${o.weight}</td>
-        <td>${o.total.toLocaleString()} đ</td>
-        <td>${o.received}</td>
-        <td>${o.return}</td>
-        <td><button class="delete-btn" onclick="deleteOrder(${index})">X</button></td>
-      </tr>
-    `;
-    table.innerHTML += row;
-  });
+  table.innerHTML = orders.map((o, index) => `
+    <tr>
+      <td>${o.customer}</td>
+      <td>${o.phone}</td>
+      <td>${o.weight}</td>
+      <td>${o.total.toLocaleString()} đ</td>
+      <td>${o.received}</td>
+      <td>${o.return}</td>
+      <td><button class="delete-btn" onclick="deleteOrder(${index})">X</button></td>
+    </tr>
+  `).join("");
 }
 
 function deleteOrder(index) {
@@ -106,15 +112,14 @@ function deleteOrder(index) {
   loadOrders();
 }
 
-document.getElementById("addOrder").addEventListener("click", () => {
+function addOrder() {
   const t = LANG[currentLang];
-
-  const customer = document.getElementById("customer").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const weight = Number(document.getElementById("weight").value);
-  const price = Number(document.getElementById("price").value);
-  const received = document.getElementById("received").value;
-  const ret = document.getElementById("return").value;
+  const customer = $("customer").value.trim();
+  const phone = $("phone").value.trim();
+  const weight = Number($("weight").value);
+  const price = Number($("price").value);
+  const received = $("received").value;
+  const ret = $("return").value;
 
   if (!customer || !weight || !price) {
     alert(t.required);
@@ -122,22 +127,42 @@ document.getElementById("addOrder").addEventListener("click", () => {
   }
 
   const total = weight * price;
-
   const order = { customer, phone, weight, price, total, received, return: ret };
 
   const orders = JSON.parse(localStorage.getItem("orders") || "[]");
   orders.push(order);
   localStorage.setItem("orders", JSON.stringify(orders));
-
   loadOrders();
 
   alert(t.added);
-});
+
+  // Clear inputs
+  $("customer").value = "";
+  $("phone").value = "";
+  $("weight").value = "";
+  $("price").value = "";
+  $("received").value = "";
+  $("return").value = "";
+}
 
 // ----------------------------
-// INI
-
+// LOGOUT
+// ----------------------------
 function logout() {
   localStorage.removeItem("isLoggedIn");
   window.location.href = "login.html";
 }
+
+// ----------------------------
+// INIT
+// ----------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  applyLanguage();
+  loadOrders();
+
+  const addBtn = $("addOrder");
+  if (addBtn) addBtn.addEventListener("click", addOrder);
+
+  const toggleBtn = $("toggleLang");
+  if (toggleBtn) toggleBtn.addEventListener("click", toggleLanguage);
+});
